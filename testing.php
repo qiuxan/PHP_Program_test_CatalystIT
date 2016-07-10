@@ -1,34 +1,25 @@
 <?php 
-/*
-$link = mysqli_connect( 'localhost',  'user_admin',  '11111', 'user_info'); //connect to the database
-
-if (!$link) {
-	
-	printf("Can't connect to MySQL Server. Errorcode: %s ", mysqli_connect_error()); 
-	exit; 
-	
-}
-
-
-$query="CREATE TABLE `user_info`.`users` ( `number` INT NOT NULL AUTO_INCREMENT , `name` CHAR(11) NOT NULL , `surname` CHAR(11) NOT NULL , `email` CHAR(30) NOT NULL , PRIMARY KEY (`number`), UNIQUE (`email`)) ENGINE = InnoDB;";
-$link->query($query);*/
-
-
 class app{
 	
 	private $filename='', $file;
     private $user_data=array();
     
-    public $link;
+    public $link,$user_name,$pw,$host,$dbname='user_info';
 	public $query_creat_table="CREATE TABLE `user_info`.`users` ( `number` INT NOT NULL AUTO_INCREMENT , `name` CHAR(11) NOT NULL , `surname` CHAR(11) NOT NULL , `email` CHAR(30) NOT NULL , PRIMARY KEY (`number`), UNIQUE (`email`)) ENGINE = InnoDB;";//set the query as a var for future change if needed
    
     
 	public function db_connect_mysqli(){
-		$this->link=mysqli_connect( 'localhost',  'user_admin',  '11111', 'user_info'); //connect to the database
-		if (!$this->link) {
-	
-			printf("Can't connect to MySQL Server. Errorcode: %s ", mysqli_connect_error()); 
-			exit; 
+		
+		if($this->user_name==''||$this->pw==''||$this->host==''){
+			echo " please enter all database information!\n";
+		}
+		else{
+			$this->link=mysqli_connect( $this->host,  $this->user_name,  $this->pw, 'user_info'); //connect to the database
+			if (!$this->link) {
+		
+				printf("Can't connect to MySQL Server. Errorcode: %s ", mysqli_connect_error()); 
+				exit; 
+			}
 		}
 		//$this->link->query($this->query_creat_table);
 	}
@@ -86,6 +77,12 @@ $appctrl=new app;//creat an object
 $appctrl->set_file_name($input);
 $appctrl->print_file_name();
 $appctrl->set_file();//save the data of the fiel into an array
-$appctrl->db_connect_mysqli();
+
 //echo "$appctrl->query_creat_table";
+$appctrl->user_name='user_admin';
+$appctrl->pw='11111';
+$appctrl->host='localhost';
+$appctrl->db_connect_mysqli();
 $appctrl->link->query($appctrl->query_creat_table);
+
+
