@@ -17,11 +17,8 @@
 			$temp=$i;
 		}
 		$data=$data.$temp.", ";
-}
+	}
 
- 
-$data = substr($data,0,strlen($data)-2); 
-echo $data; 
-
- 
+ 	$data = substr($data,0,strlen($data)-2); 
+	echo $data; 
 ?>

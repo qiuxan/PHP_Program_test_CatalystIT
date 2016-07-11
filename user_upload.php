@@ -136,12 +136,6 @@ while(1){
 		break;
 		}
 }
-
-//echo 'input is'.$input;
-//$appctrl->set_file_name($input);
-//$appctrl->print_file_name();
-
-//echo "$appctrl->query_creat_table";
-
+?>
 
 
