@@ -59,7 +59,7 @@ class app{
 					$query="INSERT INTO `users` ( `name`, `surname`, `email`) VALUES ( '".$data[0]."', '".$data[1]."', '".$get_email."')";
 					$this->link ->query($query);
 					
-					echo $query;
+					//echo $query;
 			//print_r($data);
 		}
 			    
@@ -84,7 +84,7 @@ $appctrl->host='localhost';
 $appctrl->dbname='user_info';
 $appctrl->set_file_name('users.csv');
 $appctrl->db_connect_mysqli();
-echo 'Welcome to application. please enter command. Enter -help for command details';
+echo "Welcome to application. please enter command. Enter -help for command details \n";
 while(1){
 	
 	
@@ -92,10 +92,12 @@ while(1){
 	switch ($input) {
 	   case '--file':
 		    echo "Enter file name(Default file name is users.csv):  \n";
-		    $appctrl->set_file_name(trim(fgets(STDIN, 1024)));
+		    $get_file_name=trim(fgets(STDIN, 1024));
+		    $appctrl->set_file_name($get_file_name);
+		    //$file_name=$appctrl->set_file_name(trim(fgets(STDIN, 1024)));
 		    //$file_name= trim(fgets(STDIN, 1024));
-		    //$appctrl->set_file_name($file_name);
-		    echo "File name is ".$file_name."\n";
+		    //
+		    echo "File name is ".$get_file_name."\n";
 			break;
 			
 		case '--create_table':
@@ -123,11 +125,11 @@ while(1){
 	   		echo "MySQL Database is ".$appctrl->dbname."\n Enter a new one:";
 	   		$appctrl->dbname=trim(fgets(STDIN, 1024));	
 	     	break;
-	    case '－help':
-	   		echo "--file: to enter the file name.\n--create_table: Build a table named users in MySQL database\n --dry_run: Insert data from the csv file\n -u: to change the user name of MySQL account\n -p: to change MySQL password\n -h: to change MySQL host\n -db: to change the database of MySQL\n --q: quit the application";
+	    case '-help':
+	   		echo "--file: to enter the file name.\n--create_table: Build a table named users in MySQL database\n --dry_run: Insert data from the csv file\n -u: to change the user name of MySQL account\n -p: to change MySQL password\n -h: to change MySQL host\n -db: to change the database of MySQL\n --q: quit the application\n";
 	     	break;
 	   default:
-	     echo "Please enter a right command.  -help for more information";
+	     echo "Please enter a right command.  -help for more information\n";
 	}
 	if ($input=='--q'){
 		echo "Bye!\n";
